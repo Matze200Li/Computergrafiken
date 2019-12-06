@@ -1,0 +1,24 @@
+#include "stdosl.h"
+
+shader Displacement (
+        normal Normal = 0.0,
+        float Height = 1.0,
+        float WaterLevel = 0.0,
+        float HeightDiamond = 0.0,
+        point UV = 0.0,
+        //final Displacement
+        output vector Displacement = 0.0
+    ) 
+{
+    // temporary value for changing
+    float heightTemp = Height;
+    
+    //set waterlevel
+    if (heightTemp <= WaterLevel) {
+        heightTemp = WaterLevel;
+    }
+    
+    //displace
+    Displacement = normalize(Normal) * heightTemp * HeightDiamond;
+}
+

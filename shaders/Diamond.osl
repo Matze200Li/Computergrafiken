@@ -1,0 +1,27 @@
+#include "stdosl.h"
+
+//reads DiamodSquare
+shader Diamond (
+        float X = 0.0,
+        float Y = 0.0,
+        
+        string DiamondSquare = "",
+        point UV = 0.0,
+        
+        float HeightIn = 1.0,
+        output float HeightOut = 0.0
+    ) 
+{
+    //add the x and y 
+    float x_uv = UV[0] + X;
+    float y_uv = UV[1] + Y;
+    
+    //create Texture
+	color colorValue = texture(DiamondSquare, x_uv, 1 - y_uv, "wrap", "periodic");
+    
+    //calculate rgba average
+	float height = (((colorValue[0] + colorValue[1] + colorValue[2]) / 3.0) * colorValue[3]) * HeightIn;
+    
+    HeightOut = height;
+}
+
