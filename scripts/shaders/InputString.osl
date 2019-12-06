@@ -1,0 +1,12 @@
+#include "stdosl.h"
+
+shader MyBiomeShading (
+        string File_Path = "",
+        output string Path = ""
+    ) 
+{
+    
+    Path = File_Path;
+    
+}
+

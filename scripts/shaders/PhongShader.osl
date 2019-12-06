@@ -1,0 +1,36 @@
+#include "stdosl.h"
+
+shader MyPhongShading(
+                       normal Normal = N,                           
+                       color ColorAmbient = 1.0,
+                       color ColordDiffuse = 0.8,
+                       color ColorSpecular = 0.8,
+                       float Shiny = 100,
+                       vector LightPos = 0.0,
+                       
+                       output color SurfaceColor = 0.0)
+{
+
+    
+    // normal vector into worldspace
+    vector nWorld = transform("world", Normal);
+    nWorld = normalize(nWorld);
+    
+    //lambert
+    vector light = LightPos - transform("world", P);
+    light = normalize(light);
+    float normalLight = max(dot(nWorld, light), 0);
+    vector worldView = transform("world", I);
+    worldView = normalize(worldView);
+
+    // compute half vector between light and viewing direction
+    vector half = normalize(light + worldView);
+    
+    // compute truncated dot product between normal vector and lhalf vector
+    float normalHalf = max(dot(nWorld, half), 0);
+    
+    // surface color
+    SurfaceColor =   ColorAmbient + 
+                    (ColordDiffuse/M_PI ) * normalLight + 
+                    (((Shiny + 8) / (8*M_PI))*ColorSpecular) * pow(normalHalf, Shiny);
+}
