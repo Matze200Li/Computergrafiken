@@ -1,0 +1,13 @@
+shader LiquidTreshold(
+    // Höheninfos aus Farbe
+    float LiquidTreshhold = 0.0,
+    color Height = 0.0,
+    output color isLiquid = 0.0
+    )
+    
+{   
+    if (Height[0] < LiquidTreshhold)
+        isLiquid = 0;
+    else
+        isLiquid = 1;
+}
