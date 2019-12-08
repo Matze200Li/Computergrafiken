@@ -1,0 +1,22 @@
+#include "stdosl.h"
+
+shader LambertShading (normal Normal= 0.0,
+        color ColorAmbient = 0.0,
+        color ColorDiffuse = 0.0,
+        vector LightPos = 0.0,
+        output color SurfaceColor = 0.0
+    ) 
+{
+    //normal into world
+    vector n = transform("world", Normal);
+    
+    //compute first part
+    vector light = LightPos - transform("world", P);
+    
+    // truncated dot product
+    float value = max(dot(normalize(n), normalize(light)), 0);
+    
+    // create surface color
+    SurfaceColor = ColorAmbient + (ColorDiffuse/M_PI ) * value;
+
+}

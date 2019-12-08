@@ -4,22 +4,32 @@ shader DiamondSquare(
     color Height = 0.0,
     normal Normal = 0.0,
     float Scale = 1.0,
-    float Liquid = 0.0
+    float LiquidTresholdIn = 0.0
         [[  string help = "Treshhold for Liquid", 
             float min = 0.0, float max = 1.0 ]],
     
     // Output
-    output vector Displacement = 0.0
+    output vector Displacement = 0.0,
+    output float LiquidTresholdOut = LiquidTresholdIn,
+    output color isLiquid = 0.0
     )
     
 {   
     float height_value;
+    color isLiquidTmp;
     
-    // Liquid Treshold
-    if (Height[0] < Liquid)
-        height_value = Liquid;
-    else
+    // liquid
+    if (Height[0] <= LiquidTresholdIn){
+        height_value = LiquidTresholdIn;
+        isLiquidTmp = 0;
+    }
+    // land
+    else{
         height_value = Height[0];
+        isLiquidTmp = 1;
+    }
+        
+    isLiquid = isLiquidTmp;
         
     // Normale wird auf Länge 1 normalisiert * R(GBA)
     Displacement = normalize(Normal) * height_value * Scale;

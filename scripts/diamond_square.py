@@ -6,7 +6,7 @@ import bpy
 picture_width = 513
 picture_height = 513
 # set filepth (file must be .png)
-filepath = "C:/Users/Yannik/Dropbox/studium/computergrafik/abschlussarbeit/blender_diamond_square/diamond_square.png"
+filepath = "//textures/diamond_square_output.png"
 
 # looks for max picture length and searches for next bigger value which fullfills the condition: side_length == (2^n)+1
 max_side_length = max(picture_height, picture_width)

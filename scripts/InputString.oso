@@ -1,0 +1,11 @@
+OpenShadingLanguage 1.00
+# Compiled by oslc 1.9.9
+# options: -o C:\Users\h0100080\AppData\Local\Temp\tmp5ha4ayw1.oso -IC:\Program Files\Blender Foundation\Blender\2.80\scripts\addons\cycles\shader
+shader MyBiomeShading
+param	string	File_Path	""		%read{0,0} %write{2147483647,-1}
+oparam	string	Path	""		%read{2147483647,-1} %write{0,0}
+code ___main___
+# ..\scripts\shaders\InputString.osl:10
+#     
+	assign		Path File_Path 	%filename{"..\scripts\shaders\InputString.osl"} %line{10} %argrw{"wr"}
+	end
