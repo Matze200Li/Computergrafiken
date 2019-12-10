@@ -1,0 +1,12 @@
+Dieser Programmentwurf wurde von folgenden Studenten bearbeitet:
+
+Yannik Motzet 
+Matthias Lieb
+Tobias Kiebler
+
+
+Anmerkung zu Abhängigkeiten:
+Texturen werden über den angegebenen Dateipfad referenziert.
+Aus diesem Grund gibt es Abhängigkeiten zwischen der Textur und dem Dateipfad. 
+Die Texture muss in diesem Fall unter dem jeweiligen referenzierten Namen im Dateiordner "textures" liegen.
+Es gab keine Möglichkeit diese Texture, wie beispielsweise eine Skript-Datei, im Blender-Projekt abzulegen.
