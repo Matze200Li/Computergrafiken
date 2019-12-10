@@ -1,40 +1,50 @@
 #include "stdosl.h"
 
+// Average of all colors
+float average(color colorValue)
+{
+    return ((colorValue[0] + colorValue[1] + colorValue[2]) / 3.0) * colorValue[3];
+}
+
 shader ColorShading (
         point UV = 0.0,
         float Height = 0.0,
-        string Moisture = "",
+        string PerlinNoise = "",
         color WaterColor = 0.0,
         string ColorMap = "",
         float WaterLevel = 0.0,
         
         output color Color = 0.0,
         output color WaterMap = 0.0,
+    //    output color LandMap = 0.0
     ) 
 {
     
-    // Get x and y value for colormapping
-    color xTemp = texture(Moisture, UV[0], 1 - UV[1]);
-    float x_colorMap = ((xTemp[0] + xTemp[1] + xTemp[2]) / 3.0) * xTemp[3];
-    float y_colorMap = Height-WaterLevel;
+    // Get the height and the moisture
+    float x = average(texture(PerlinNoise, UV[0], 1 - UV[1]));
+    float y = Height-WaterLevel;
     
-    // declare output
+    
+    // output
     color outputColor = 0.0;
-    
     // map for water
     color water = 0.0;
+    // map for land
+ //   color land = 1.0;
     
-    // Set color
+    
+    // Set color, depending on the height
     if (Height <= WaterLevel && WaterLevel > 0) {
         outputColor = WaterColor;
         water = 1.0;
-
+      //  land = 0.0;
     } else {
-        outputColor = texture(ColorMap, x_colorMap, 1- y_colorMap, "wrap", "clamp");
+        outputColor = texture(ColorMap, x, 1- y, "wrap", "clamp");
     }
     
     // Output
     Color = outputColor;
+   // LandMap = land;
     WaterMap = water;
 }
 
