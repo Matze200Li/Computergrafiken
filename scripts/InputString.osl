@@ -1,7 +1,6 @@
 #include "stdosl.h"
 
-//reads external files
-shader InputReader (
+shader MyBiomeShading (
         string File_Path = "",
         output string Path = ""
     ) 
@@ -10,3 +9,4 @@ shader InputReader (
     Path = File_Path;
     
 }
+
