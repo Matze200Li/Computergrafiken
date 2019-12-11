@@ -1,6 +1,6 @@
 #include "stdosl.h"
 
-shader MyPhongShading(
+shader PhongShading(
                        normal Normal = N,                           
                        color ColorAmbient = 1.0,
                        color ColordDiffuse = 0.8,
